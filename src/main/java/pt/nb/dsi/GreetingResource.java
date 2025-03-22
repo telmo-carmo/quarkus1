@@ -1,5 +1,18 @@
 package pt.nb.dsi;
 
+/*
+ * This is a simple REST resource that returns a greeting message.
+ * It also returns the current date and time in ISO format.
+ * It also returns the version of the database engine.
+ 
+---
+./mvnw compile quarkus:dev
+
+./mvnw package -Dquarkus.package.jar.type=uber-jar
+java -jar target/quarkus1-1.0.0-SNAPSHOT-runner.jar 
+curl http://localhost:8080/hello/up
+
+ */
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
