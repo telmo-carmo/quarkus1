@@ -1,5 +1,6 @@
 package pt.nb.dsi.dal;
 
+import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.*;
@@ -10,7 +11,8 @@ import java.util.List;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.quarkus.logging.Log;
 
-@RegisterForReflection
+//@RegisterForReflection
+@ApplicationScoped // Important: Make it a CDI bean
 public class BonusRepository implements IBonusRepository {
 
     @Inject
