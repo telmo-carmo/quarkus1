@@ -16,7 +16,6 @@ import javax.sql.DataSource;
 
 import io.quarkus.logging.Log;
 
-
 @Path("/hello")
 public class GreetingResource {
 
@@ -35,19 +34,22 @@ public class GreetingResource {
     @GET
     @Path("/up")
     @Produces(MediaType.APPLICATION_JSON)
-    public Map<String, String> upSatus() {
+    public Map<String, String> getStatus() {
         Map<String, String> res = new HashMap<>();
         res.put("status", "up");
+        // String sql1 = "SELECT version()";
+        String sql1 = "SELECT sqlite_version()";
 
         try (Connection connection = dataSource.getConnection();
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT version();")) {
+                Statement statement = connection.createStatement();
+
+                ResultSet resultSet = statement.executeQuery(sql1)) {
             if (resultSet.next()) {
                 res.put("dbver", resultSet.getString(1));
             }
         } catch (Exception e) {
             res.put("dbver", "unknown");
-            e.printStackTrace();
+            Log.error(e);
         }
 
         return res;
