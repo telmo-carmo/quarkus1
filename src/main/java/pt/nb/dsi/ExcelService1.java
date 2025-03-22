@@ -63,6 +63,7 @@ public class ExcelService1 {
             generateContent(workbook,"Persons");
             workbook.write(bos);
             bos.close();
+            workbook.close();
             logger.warn("Retrieving Excel as a Byte array");
         } catch (IOException e) {
             logger.error(e);
