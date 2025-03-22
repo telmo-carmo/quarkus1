@@ -1,10 +1,10 @@
 @host1 = http://localhost:8080
 
 ###
-GET {{host1}}/api/hello
+GET {{host1}}/hello
 
 ###
-GET {{host1}}/api/hello/up
+GET {{host1}}/hello/up
 
 ###
 GET {{host1}}/api/bonus

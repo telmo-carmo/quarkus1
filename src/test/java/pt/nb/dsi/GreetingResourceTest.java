@@ -11,7 +11,7 @@ class GreetingResourceTest {
     @Test
     void testHelloEndpoint() {
         given()
-          .when().get("/api/hello")
+          .when().get("/hello")
           .then()
              .statusCode(200)
              .body(startsWith("Hello from"));

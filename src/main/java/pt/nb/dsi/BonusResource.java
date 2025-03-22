@@ -11,7 +11,7 @@ import pt.nb.dsi.dal.BonusRepository;
 
 import java.util.List;
 
-@Path("/bonus")
+@Path("/api/bonus")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class BonusResource {
