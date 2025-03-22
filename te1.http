@@ -40,5 +40,21 @@ GET {{host1}}/api/bonus/Zorro
 ###
 DELETE {{host1}}/api/bonus/Zorro
 
+#
+
+@jwt = Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoiZGVtbyIsInJvbGVzIjoiVVNFUiIsImV4cCI6MTc0MjY5NDMwMywiYXVkIjoiaHR0cHM6Ly93d3djZXJ0LmJwb3J0dWdhbC5uZXQvYWRmcy9vYXV0aDIvdG9rZW4ifQ.GT28Ai8n7u_UD7wTcdmXxK8kIDzjNXg-LcBXCkCQ-lg
+
 ###
+POST {{host1}}/auth/login HTTP/1.1
+content-type: application/json
+
+{
+  "uid": "demo",
+  "pwd": "123",
+  "aut": null
+}
+
+###
+GET {{host1}}/auth/rnd HTTP/1.1
+Authorization:  {{jwt}}
 
