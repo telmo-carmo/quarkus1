@@ -7,11 +7,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-import io.quarkus.runtime.annotations.RegisterForReflection;
 import io.quarkus.logging.Log;
 
-//@RegisterForReflection
+
 @ApplicationScoped // Important: Make it a CDI bean
 public class BonusRepository implements IBonusRepository {
 
@@ -44,7 +42,7 @@ public class BonusRepository implements IBonusRepository {
                 bonuses.add(mapRowToBonus(resultSet));
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            Log.error(e);
         }
 
 
@@ -81,9 +79,7 @@ public class BonusRepository implements IBonusRepository {
             statement.setInt(4, bn.getComm());
             int affectedRows = statement.executeUpdate();
             if (affectedRows > 0) {
-
-                        return bn;
-                
+                return bn;
             } else {
                 return null;
             }
