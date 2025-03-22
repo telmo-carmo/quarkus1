@@ -9,4 +9,6 @@ GET {{host1}}/api/hello/up
 ###
 GET {{host1}}/api/bonus
 
+###
+GET {{host1}}/api/bonus/JONES
 
