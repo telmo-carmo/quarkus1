@@ -3,7 +3,7 @@ package pt.nb.dsi;
 /*
  * This is a simple REST resource that returns a greeting message.
  * It also returns the current date and time in ISO format.
- * It also returns the version of the database engine.
+ * It also returns the version of the database engine.  /hello/up
  
 ---
 ./mvnw compile quarkus:dev
@@ -54,14 +54,14 @@ public class GreetingResource {
         String sql1 = "SELECT sqlite_version()";
 
         try (Connection connection = dataSource.getConnection();
-                Statement statement = connection.createStatement();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(sql1)) {
 
-                ResultSet resultSet = statement.executeQuery(sql1)) {
             if (resultSet.next()) {
                 res.put("dbver", resultSet.getString(1));
             }
         } catch (Exception e) {
-            res.put("dbver", "unknown");
+            res.put("dbver", "unknown err:" + e.getMessage());
             Log.error(e);
         }
 

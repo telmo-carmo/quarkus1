@@ -12,3 +12,33 @@ GET {{host1}}/api/bonus
 ###
 GET {{host1}}/api/bonus/JONES
 
+###
+POST {{host1}}/api/bonus
+Content-Type: application/json
+
+{
+  "ename": "Zorro",
+  "job": "MANAGER",
+  "sal": 1234,
+  "comm": 300
+}
+
+###
+PUT {{host1}}/api/bonus/Zorro
+Content-Type: application/json
+
+{
+  "ename": "Zorro",
+  "job": "Salesman",
+  "sal": 2344,
+  "comm": 122
+}
+
+###
+GET {{host1}}/api/bonus/Zorro
+
+###
+DELETE {{host1}}/api/bonus/Zorro
+
+###
+

@@ -73,8 +73,8 @@ public class BonusRepository implements IBonusRepository {
         String query = "INSERT INTO Bonus (ename,job,sal,comm) VALUES (?,?,?,?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, bn.getJob());
-            statement.setString(2, bn.getEname());
+            statement.setString(1, bn.getEname());
+            statement.setString(2, bn.getJob());
             statement.setInt(3, bn.getSal());
             statement.setInt(4, bn.getComm());
             int affectedRows = statement.executeUpdate();

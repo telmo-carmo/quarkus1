@@ -27,8 +27,11 @@ public class BonusResource {
     @GET
     @Path("/{id}")
     public Bonus getById(@PathParam("id") String id) {
-        return bonusRepository.findOne(id);
-    }
+        Bonus bonus = bonusRepository.findOne(id);
+        if (bonus == null) {
+            throw new WebApplicationException("Bonus not found", Response.Status.NOT_FOUND);
+        }
+        return bonus;}
 
     @POST
     public Response create(Bonus bonus) {
