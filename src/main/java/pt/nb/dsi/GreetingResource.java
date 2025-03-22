@@ -1,5 +1,7 @@
 package pt.nb.dsi;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 /*
  * This is a simple REST resource that returns a greeting message.
  * It also returns the current date and time in ISO format.
@@ -25,6 +27,9 @@ import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.ResponseBuilder;
+
 import javax.sql.DataSource;
 
 import io.quarkus.logging.Log;
@@ -34,6 +39,9 @@ public class GreetingResource {
 
     @Inject
     DataSource dataSource;
+
+    @Inject
+    ExcelService1 excelService;
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
@@ -66,5 +74,18 @@ public class GreetingResource {
         }
 
         return res;
+    }
+
+    @GET
+    @Path("/excel1")
+    @Produces("application/vnd.ms-excel")
+    public Response downloadExcel() {
+
+        final String filename = "Sample1.xlsx";
+
+        InputStream is = new ByteArrayInputStream(excelService.toByteArray());
+        ResponseBuilder responseBuilder = Response.ok(is);
+        responseBuilder.header("Content-Disposition", String.format("attachment; filename=\"%s\"", filename));
+        return responseBuilder.build();
     }
 }
