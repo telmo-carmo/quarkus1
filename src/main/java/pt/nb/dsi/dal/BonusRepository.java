@@ -9,6 +9,7 @@ import java.util.List;
 
 import io.quarkus.logging.Log;
 
+// use annnotation like @ApplicationScoped, @RequestScoped, or @Singleton.
 
 @ApplicationScoped // Important: Make it a CDI bean
 public class BonusRepository implements IBonusRepository {

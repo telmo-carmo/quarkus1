@@ -7,7 +7,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 import pt.nb.dsi.dal.Bonus;
-import pt.nb.dsi.dal.BonusRepository;
+import pt.nb.dsi.dal.IBonusRepository;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import java.util.List;
 public class BonusResource {
 
     @Inject
-    BonusRepository bonusRepository;
+    IBonusRepository bonusRepository;
 
     @GET
     public List<Bonus> getAll() {
