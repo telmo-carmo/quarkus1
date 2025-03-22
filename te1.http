@@ -58,5 +58,5 @@ content-type: application/json
 
 ###
 GET {{host1}}/auth/rnd HTTP/1.1
-Authorization:  {{jwt}}
+Authorization: {{jwt}}
 
