@@ -42,7 +42,9 @@ DELETE {{host1}}/api/bonus/Zorro
 
 #
 
-@jwt = Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoiZGVtbyIsInJvbGVzIjoiVVNFUiIsImV4cCI6MTc0MjY5NDMwMywiYXVkIjoiaHR0cHM6Ly93d3djZXJ0LmJwb3J0dWdhbC5uZXQvYWRmcy9vYXV0aDIvdG9rZW4ifQ.GT28Ai8n7u_UD7wTcdmXxK8kIDzjNXg-LcBXCkCQ-lg
+@jwt = Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6IjEiLCJzdWIiOiJkZW1vIiwicm9sZXMiOiJVU0VSIiwiZXhwIjoxNzQyNjc4OTU2LCJhdWQiOiJodHRwczovL3d3d2NlcnQuYnBvcnR1Z2FsLm5ldC9hZGZzL29hdXRoMi90b2tlbiJ9.MDos32PnXm3AryZnwsT8e3abaO_hjkqamXTukZMKtLk
+
+
 
 ###
 POST {{host1}}/auth/login HTTP/1.1
