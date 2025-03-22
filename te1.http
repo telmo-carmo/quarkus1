@@ -3,3 +3,7 @@
 ###
 GET {{host1}}/hello
 
+###
+GET {{host1}}/api/bonus
+
+
