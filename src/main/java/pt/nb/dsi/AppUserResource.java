@@ -36,17 +36,16 @@ public class AppUserResource {
         return repository.listAll();
     }
 
+
     @GET
     @Path("/count")
     @Transactional
     public int getUsersCount() {
-        AppUser u1 = new AppUser("admin", "admin", "ADMIN", LocalDate.now());
-        u1.id = UUID.randomUUID();
+        // AppUser u1 = new AppUser("admin", "admin", "ADMIN", LocalDate.now());
+        // repository.persist(u1);
+        // logger.info(u1);
 
-        repository.persist(u1);
-        logger.info(u1);
-        return 0;
-        //return repository.listAll().size();
+        return repository.listAll().size();
     }
 
     @GET
@@ -63,7 +62,7 @@ public class AppUserResource {
     @POST
     @Transactional
     public Response createUser(AppUser user) {
-        user.id = UUID.randomUUID();
+        //user.id = UUID.randomUUID(); // persit() generates the UUID
         repository.persist(user);
         logger.info("Created User with id: " + user.id);
         return Response.status(Response.Status.CREATED).entity(user).build();

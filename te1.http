@@ -68,3 +68,26 @@ GET {{host1}}/api/users
 ###
 GET {{host1}}/api/users/count
 
+###
+POST {{host1}}/api/users
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "passHash": "123",
+  "role": "USER",
+  "createdAt": "2001-02-01T00:00:00Z"
+}
+###
+GET {{host1}}/api/users/7eee4d77-167b-4345-b5dd-8128f6482a65
+
+###
+PUT {{host1}}/api/users/7eee4d77-167b-4345-b5dd-8128f6482a65
+Content-Type: application/json
+
+{
+  "username": "demo",
+  "passHash": "123",
+  "role": "ADMIN",
+  "createdAt": "2000-03-01T00:00:00Z"
+}
