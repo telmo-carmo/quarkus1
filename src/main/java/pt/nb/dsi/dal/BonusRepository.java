@@ -1,5 +1,7 @@
 package pt.nb.dsi.dal;
 
+// A  Repository implemented in plain JDBC  , no ORM
+
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import javax.sql.DataSource;

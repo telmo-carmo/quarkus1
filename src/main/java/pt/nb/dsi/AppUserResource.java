@@ -1,6 +1,7 @@
 package pt.nb.dsi;
 
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
@@ -10,11 +11,14 @@ import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+import org.jboss.logging.Logger;
 
 import pt.nb.dsi.dal.AppUser;
 import pt.nb.dsi.dal.AppUserRepository;
@@ -23,6 +27,7 @@ import pt.nb.dsi.dal.AppUserRepository;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AppUserResource {
+    private static final Logger logger = Logger.getLogger(AppUserResource.class);
     @Inject
     AppUserRepository repository;
 
@@ -32,8 +37,22 @@ public class AppUserResource {
     }
 
     @GET
+    @Path("/count")
+    @Transactional
+    public int getUsersCount() {
+        AppUser u1 = new AppUser("admin", "admin", "ADMIN", LocalDate.now());
+        u1.id = UUID.randomUUID();
+
+        repository.persist(u1);
+        logger.info(u1);
+        return 0;
+        //return repository.listAll().size();
+    }
+
+    @GET
     @Path("/{id}")
     public Response getUserById(@PathParam("id") UUID id) {
+        logger.info("getUserById: " + id);
         AppUser u = repository.findById(id);
         if (u == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -42,15 +61,19 @@ public class AppUserResource {
     }
 
     @POST
+    @Transactional
     public Response createUser(AppUser user) {
         user.id = UUID.randomUUID();
         repository.persist(user);
+        logger.info("Created User with id: " + user.id);
         return Response.status(Response.Status.CREATED).entity(user).build();
     }
 
     @PUT
     @Path("/{id}")
+    @Transactional
     public Response updateUser(@PathParam("id") UUID id, AppUser user) {
+        logger.info("updateUser: " + id);
         AppUser u = repository.findById(id);
         if (u == null) {
             //throw new WebApplicationException("User not found", 404);
@@ -66,6 +89,7 @@ public class AppUserResource {
 
     @DELETE
     @Path("/{id}")
+    @Transactional
     public Response deleteUser(@PathParam("id") UUID id) {
         boolean deleted = repository.deleteById(id);
         if (!deleted) {
