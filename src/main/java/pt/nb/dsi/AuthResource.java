@@ -58,7 +58,7 @@ public class AuthResource {
         if (u_role != null) {
             Instant expirationTime = Instant.now().plus(jwt_duration * 1000, ChronoUnit.MILLIS);
             Date expirationDate = Date.from(expirationTime);
-
+            Log.info("JWT expires at " + expirationDate);
             // SecretKey key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretString));
             Key key = Keys.hmacShaKeyFor(jwt_Secret.getBytes());
             String bp_audience = "https://wwwcert.bportugal.net/adfs/oauth2/token";
