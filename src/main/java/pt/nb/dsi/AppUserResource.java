@@ -41,7 +41,9 @@ public class AppUserResource {
     @Path("/count")
     @Transactional
     public int getUsersCount() {
-        // AppUser u1 = new AppUser("admin", "admin", "ADMIN", LocalDate.now());
+        // String pwd = "admin";
+        // pwd = "sha:" + Utils1.sha256Base64(pwd);
+        // AppUser u1 = new AppUser("admin", pwd, "ADMIN", LocalDate.now());
         // repository.persist(u1);
         // logger.info(u1);
 
