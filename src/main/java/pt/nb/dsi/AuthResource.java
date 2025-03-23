@@ -12,6 +12,7 @@ import javax.crypto.SecretKey;
 
 import java.util.Date;
 
+import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.HeaderParam;
 import jakarta.ws.rs.POST;
@@ -19,8 +20,8 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-
-
+import pt.nb.dsi.dal.AppUser;
+import pt.nb.dsi.dal.AppUserRepository;
 import io.quarkus.security.UnauthorizedException;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -43,16 +44,18 @@ public class AuthResource {
     @ConfigProperty(name = "app.jwt.secret", defaultValue = "my-secret-symmetric-key in 32 BY") // 256 bit key
     String jwt_Secret;
 
+    @Inject
+    AppUserRepository repository;
 
     @POST
     @Path("/login")
     // @PermitAll //import javax.annotation.security.PermitAll;
     @Produces(MediaType.APPLICATION_JSON)
     public Map<String, String> login(LoginReq req) {
-        Log.infof("AuthResource.login %s %s", req.uid, req.pwd);
+        Log.infof("AuthResource.login username=%s", req.uid);
         String token = null;
-
-        if (authenticate(req.uid, req.pwd)) {
+        String u_role = authenticate(req.uid, req.pwd);
+        if (u_role != null) {
             Instant expirationTime = Instant.now().plus(jwt_duration * 1000, ChronoUnit.MILLIS);
             Date expirationDate = Date.from(expirationTime);
 
@@ -65,7 +68,7 @@ public class AuthResource {
             token = Jwts.builder()
                     .claim("id", 1)
                     .claim("sub", req.uid)
-                    .claim("roles", "USER") // .setIssuedAt(Date.from(Instant.ofEpochSecond(1466796822L)))
+                    .claim("roles", u_role) // .setIssuedAt(Date.from(Instant.ofEpochSecond(1466796822L)))
                     .expiration(expirationDate)
                     .claim("aud", bp_audience)
                     .signWith(key)
@@ -173,10 +176,21 @@ public class AuthResource {
         return u1;
     }
 
-    private boolean authenticate(String username, String password) {
+    private String authenticate(String username, String password) {
         // Replace with your database or external authentication system
-        // Example (very insecure):
-        return "123".equals(password);
+
+        AppUser u = repository.findByUsername(username);
+        if (u != null) {
+            String pw =  u.passHash;
+            if (pw.startsWith("sha:")) {
+                pw = pw.substring(4);
+                password = Utils1.sha256Base64(password);
+                Log.infof("AuthResource.authenticate: sha: %s == %s", pw,password);
+            }
+            if (pw.equals(password))
+                return u.role;
+        }
+        return null;
     }
 
     public static class LoginReq {

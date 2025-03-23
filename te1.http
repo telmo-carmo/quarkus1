@@ -42,7 +42,7 @@ DELETE {{host1}}/api/bonus/Zorro
 
 #
 
-@jwt = Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoiZGVtbyIsInJvbGVzIjoiVVNFUiIsImV4cCI6MTc0MjY5Njc4OCwiYXVkIjoiaHR0cHM6Ly93d3djZXJ0LmJwb3J0dWdhbC5uZXQvYWRmcy9vYXV0aDIvdG9rZW4ifQ.pcP2Y3SFcRIsbaQQbrdWcN3DOonHBn3GyGlBUqHnbNw
+@jwt = Bearer eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwic3ViIjoiZGVtbyIsInJvbGVzIjoiVVNFUiIsImV4cCI6MTc0Mjc1Mjc2NCwiYXVkIjoiaHR0cHM6Ly93d3djZXJ0LmJwb3J0dWdhbC5uZXQvYWRmcy9vYXV0aDIvdG9rZW4ifQ.Yw3McAXsmJpqVT6FheYGkDOdKgJ4j08cCZ2aWTfywV0
 
 
 ###
@@ -87,7 +87,7 @@ Content-Type: application/json
 
 {
   "username": "demo",
-  "passHash": "123",
+  "passHash": "sha:pmWkWSBCL51Bfkhn79xPuKBKHz//H6B+mY6G9/eieuM=",
   "role": "ADMIN",
   "createdAt": "2000-03-01T00:00:00Z"
 }

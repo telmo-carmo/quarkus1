@@ -10,7 +10,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 @ApplicationScoped
 public class AppUserRepository implements PanacheRepositoryBase<AppUser, UUID> {
 
-    public AppUser findByName(String name){
+    public AppUser findByUsername(String name){
         return find("username", name).firstResult();
     }
     
