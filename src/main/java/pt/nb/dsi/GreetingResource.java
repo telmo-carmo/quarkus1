@@ -7,6 +7,16 @@ import java.io.InputStream;
  * It also returns the current date and time in ISO format.
  * It also returns the version of the database engine.  /hello/up
  
+see: https://docs.quarkiverse.io/quarkus-quinoa/dev/index.html  for React FE
+
+./mvnw quarkus:add-extension -Dextensions="io.quarkus:quarkus-smallrye-openapi"
+
+add default /q/openapi endpoint or change:
+ quarkus.smallrye-openapi.path=/swagger
+http://localhost:8080/q/openapi?format=JSON
+
+By default, Swagger UI is accessible at /q/swagger-ui.
+
 ---
 ./mvnw compile quarkus:dev
 
