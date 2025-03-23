@@ -117,7 +117,7 @@ public class AuthResource {
             this.roles = roles;
         }
         public String toString() {
-            return String.format("UserInfo: id=%d, username=%s, roles=%s", id, username, roles);
+            return String.format("UserInfo{ id=%d, username=%s, roles=%s}", id, username, roles);
         }
     }
 
