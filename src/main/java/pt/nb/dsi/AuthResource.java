@@ -47,6 +47,8 @@ public class AuthResource {
     @Inject
     AppUserRepository repository;
 
+    static record AuthResult(String uid, String roles) {}
+
     @POST
     @Path("/login")
     // @PermitAll //import javax.annotation.security.PermitAll;
@@ -54,8 +56,8 @@ public class AuthResource {
     public Map<String, String> login(LoginReq req) {
         Log.infof("AuthResource.login username=%s", req.uid);
         String token = null;
-        String u_role = authenticate(req.uid, req.pwd);
-        if (u_role != null) {
+        AuthResult u_res = authenticate(req.uid, req.pwd);
+        if (u_res != null) {
             Instant expirationTime = Instant.now().plus(jwt_duration * 1000, ChronoUnit.MILLIS);
             Date expirationDate = Date.from(expirationTime);
             Log.info("JWT expires at " + expirationDate);
@@ -66,9 +68,9 @@ public class AuthResource {
             //audienceList.add(bp_audience);
 
             token = Jwts.builder()
-                    .claim("id", 1)
+                    .claim("id", u_res.uid)
                     .claim("sub", req.uid)
-                    .claim("roles", u_role) // .setIssuedAt(Date.from(Instant.ofEpochSecond(1466796822L)))
+                    .claim("roles", u_res.roles) // .setIssuedAt(Date.from(Instant.ofEpochSecond(1466796822L)))
                     .expiration(expirationDate)
                     .claim("aud", bp_audience)
                     .signWith(key)
@@ -112,18 +114,20 @@ public class AuthResource {
     public static class UserInfo {
         public String username;
         public String roles;
-        public Integer id;
+        public String id;
 
-        public UserInfo(Integer id, String username, String roles) {
+        public UserInfo(String id, String username, String roles) {
             this.id = id;
             this.username = username;
             this.roles = roles;
         }
         public String toString() {
-            return String.format("UserInfo{ id=%d, username=%s, roles=%s}", id, username, roles);
+            return String.format("UserInfo{ id=%s, username=%s, roles=%s}", id, username, roles);
         }
     }
 
+
+    
     @GET
     @Path("/valid")   // GET /auth/valid?token=Bearer+XXXX
     public Map<String,String> valid(@QueryParam("token") String token) {
@@ -136,10 +140,11 @@ public class AuthResource {
 
         UserInfo up =  validJWT(token);
         Log.infof("Valid: token: %s - user: %s",token,up);
-        model.put("token", token);
+        
         if (up != null) {
             model.put("valid", "true");
             model.put("principal", up.toString());
+            model.put("token", token);
         }
         else
             model.put("error", "bad token");
@@ -158,13 +163,15 @@ public class AuthResource {
             SecretKey key = Keys.hmacShaKeyFor(jwt_Secret.getBytes());
             jwsClaims = Jwts.parser().verifyWith(key).build().parseSignedClaims(token);
  
-        } catch (io.jsonwebtoken.security.SignatureException | io.jsonwebtoken.MalformedJwtException ex) {
+        } catch (io.jsonwebtoken.security.SignatureException 
+                | io.jsonwebtoken.MalformedJwtException 
+                | io.jsonwebtoken.ExpiredJwtException ex) {
             Log.error("Invalid JWT",ex);
             return null;
         }
         Claims claims = jwsClaims.getPayload();
         String username = claims.getSubject();
-        Integer userId = claims.get("id", Integer.class);
+        String userId = claims.get("id", String.class);
         String sroles = claims.get("roles", String.class);
         // List<String> roles = null;
         // if (sroles != null && sroles.length()>0)
@@ -176,7 +183,7 @@ public class AuthResource {
         return u1;
     }
 
-    private String authenticate(String username, String password) {
+    private AuthResult authenticate(String username, String password) {
         // Replace with your database or external authentication system
 
         AppUser u = repository.findByUsername(username);
@@ -188,7 +195,7 @@ public class AuthResource {
                 Log.infof("AuthResource.authenticate: sha: %s == %s", pw,password);
             }
             if (pw.equals(password))
-                return u.role;
+                return new AuthResult(u.id.toString(), u.role);
         }
         return null;
     }
