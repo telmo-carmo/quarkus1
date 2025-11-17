@@ -1,7 +1,7 @@
 package pt.nb.dsi;
 
 /*
- * see
+ * use it:
  * 
  * curl http://localhost:8080/graphql/schema.graphql
  * 
@@ -9,6 +9,7 @@ package pt.nb.dsi;
  * 
  */
 import org.eclipse.microprofile.graphql.GraphQLApi;
+import org.eclipse.microprofile.graphql.Name;
 import org.eclipse.microprofile.graphql.Query;
 
 import java.util.List;
@@ -33,11 +34,24 @@ public class GraphBonusResource {
 
         }
     }
-        
+
+    query getBonus {
+        bonus(bonusId: "JONES") {
+            ename
+            job
+            sal
+        }
+    }
      */
     @Query("allBonus") 
     @Description("Get all Bonus from a galaxy far far away") 
     public List<Bonus> getAllBonus() {
         return bonusRepository.findAll();
+    }
+
+    @Query
+    @Description("Get one Bonus by name")
+    public Bonus getBonus(@Name("bonusId") String id) {
+        return bonusRepository.findOne(id);
     }
 }

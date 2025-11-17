@@ -1,5 +1,3 @@
-mvn dependency:tree
-
 [INFO] Scanning for projects...
 [INFO] 
 [INFO] -------------------------< pt.nb.dsi:quarkus1 >-------------------------
@@ -17,10 +15,6 @@ mvn dependency:tree
 [INFO] |  |  |  +- io.smallrye.reactive:mutiny-zero-flow-adapters:jar:1.1.1:compile
 [INFO] |  |  |  \- io.smallrye.common:smallrye-common-annotation:jar:2.14.0:compile
 [INFO] |  |  +- io.quarkus:quarkus-mutiny:jar:3.29.3:compile
-[INFO] |  |  |  +- io.quarkus:quarkus-smallrye-context-propagation:jar:3.29.3:compile
-[INFO] |  |  |  |  \- io.smallrye:smallrye-context-propagation:jar:2.2.1:compile
-[INFO] |  |  |  |     +- io.smallrye:smallrye-context-propagation-api:jar:2.2.1:compile
-[INFO] |  |  |  |     \- io.smallrye:smallrye-context-propagation-storage:jar:2.2.1:compile
 [INFO] |  |  |  \- io.smallrye.reactive:mutiny-smallrye-context-propagation:jar:3.0.1:compile
 [INFO] |  |  \- io.quarkus:quarkus-vertx:jar:3.29.3:compile
 [INFO] |  |     +- io.quarkus:quarkus-netty:jar:3.29.3:compile
@@ -70,7 +64,6 @@ mvn dependency:tree
 [INFO] |  |     \- com.aayushatharva.brotli4j:native-windows-x86_64:jar:1.16.0:compile
 [INFO] |  +- io.quarkus:quarkus-jsonp:jar:3.29.3:compile
 [INFO] |  |  \- org.eclipse.parsson:parsson:jar:1.1.7:compile
-[INFO] |  |     \- jakarta.json:jakarta.json-api:jar:2.1.3:compile
 [INFO] |  \- io.quarkus:quarkus-virtual-threads:jar:3.29.3:compile
 [INFO] |     \- io.vertx:vertx-core:jar:4.5.22:compile
 [INFO] |        +- io.netty:netty-common:jar:4.1.128.Final:compile
@@ -142,7 +135,7 @@ mvn dependency:tree
 [INFO] |  \- org.hibernate.orm:hibernate-community-dialects:jar:7.1.6.Final:compile
 [INFO] |     \- org.hibernate.orm:hibernate-core:jar:7.1.6.Final:compile
 [INFO] |        +- org.hibernate.models:hibernate-models:jar:1.0.1:runtime
-[INFO] |        +- com.fasterxml:classmate:jar:1.7.1:runtime
+[INFO] |        +- com.fasterxml:classmate:jar:1.7.1:compile
 [INFO] |        \- org.antlr:antlr4-runtime:jar:4.13.2:compile
 [INFO] +- io.quarkus:quarkus-hibernate-orm-panache:jar:3.29.3:compile
 [INFO] |  +- io.quarkus:quarkus-hibernate-orm:jar:3.29.3:compile
@@ -162,6 +155,31 @@ mvn dependency:tree
 [INFO] |  +- io.quarkus:quarkus-hibernate-orm-panache-common:jar:3.29.3:compile
 [INFO] |  |  \- io.quarkus:quarkus-panache-hibernate-common:jar:3.29.3:compile
 [INFO] |  \- io.quarkus:quarkus-panache-common:jar:3.29.3:compile
+[INFO] +- io.quarkus:quarkus-smallrye-graphql:jar:3.29.3:compile
+[INFO] |  +- io.quarkus:quarkus-jsonb:jar:3.29.3:compile
+[INFO] |  |  \- org.eclipse:yasson:jar:3.0.4:compile
+[INFO] |  |     \- jakarta.json.bind:jakarta.json.bind-api:jar:3.0.1:compile
+[INFO] |  +- io.smallrye:smallrye-graphql-cdi:jar:2.15.0:compile
+[INFO] |  |  +- io.smallrye:smallrye-graphql:jar:2.15.0:compile
+[INFO] |  |  |  +- io.smallrye:smallrye-graphql-api:jar:2.15.0:compile
+[INFO] |  |  |  |  \- org.eclipse.microprofile.graphql:microprofile-graphql-api:jar:2.0:compile
+[INFO] |  |  |  +- io.smallrye:smallrye-graphql-schema-model:jar:2.15.0:compile
+[INFO] |  |  |  +- com.graphql-java:graphql-java:jar:22.2:compile
+[INFO] |  |  |  |  \- com.graphql-java:java-dataloader:jar:3.3.0:compile
+[INFO] |  |  |  +- com.apollographql.federation:federation-graphql-java-support:jar:4.4.0:compile
+[INFO] |  |  |  |  \- com.google.protobuf:protobuf-java:jar:4.32.1:compile
+[INFO] |  |  |  \- com.graphql-java:graphql-java-extended-scalars:jar:21.0:compile
+[INFO] |  |  \- jakarta.json:jakarta.json-api:jar:2.1.3:compile
+[INFO] |  +- io.quarkus:quarkus-smallrye-context-propagation:jar:3.29.3:compile
+[INFO] |  |  \- io.smallrye:smallrye-context-propagation:jar:2.2.1:compile
+[INFO] |  |     +- io.smallrye:smallrye-context-propagation-api:jar:2.2.1:compile
+[INFO] |  |     \- io.smallrye:smallrye-context-propagation-storage:jar:2.2.1:compile
+[INFO] |  +- org.eclipse.microprofile.metrics:microprofile-metrics-api:jar:4.0.1:compile
+[INFO] |  \- io.quarkus:quarkus-hibernate-validator:jar:3.29.3:compile
+[INFO] |     +- org.hibernate.validator:hibernate-validator:jar:9.0.1.Final:compile
+[INFO] |     |  \- jakarta.validation:jakarta.validation-api:jar:3.1.1:compile
+[INFO] |     +- org.glassfish.expressly:expressly:jar:6.0.0:compile
+[INFO] |     \- io.smallrye.config:smallrye-config-validator:jar:3.14.1:compile
 [INFO] +- io.jsonwebtoken:jjwt-api:jar:0.13.0:compile
 [INFO] +- io.jsonwebtoken:jjwt-impl:jar:0.13.0:runtime
 [INFO] +- io.jsonwebtoken:jjwt-jackson:jar:0.13.0:runtime
@@ -291,6 +309,6 @@ mvn dependency:tree
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  3.198 s
-[INFO] Finished at: 2025-11-17T14:19:53Z
+[INFO] Total time:  6.345 s
+[INFO] Finished at: 2025-11-17T18:03:15Z
 [INFO] ------------------------------------------------------------------------
