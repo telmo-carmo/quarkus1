@@ -1,7 +1,7 @@
 package pt.nb.dsi;
 
 import pt.nb.dsi.dal.Emp;
-import pt.nb.dsi.dal.IEmpRepository;
+import pt.nb.dsi.dal.EmpRepository;
 
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
@@ -16,7 +16,7 @@ import java.util.List;
 public class EmpResource {
 
     @Inject
-    IEmpRepository empRepository;
+    EmpRepository empRepository;
 
     @GET
     public List<Emp> listAll() {
@@ -65,5 +65,11 @@ public class EmpResource {
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @GET
+    @Path("/count")
+    public Long count() {
+        return empRepository.count();
     }
 }

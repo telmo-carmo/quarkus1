@@ -98,6 +98,9 @@ Content-Type: application/json
 GET {{host1}}/api/emp
 
 ###
+GET {{host1}}/api/emp/count
+
+###
 GET {{host1}}/graphql/schema.graphql
 
 ###

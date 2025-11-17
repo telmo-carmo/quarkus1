@@ -3,7 +3,7 @@ package pt.nb.dsi.dal;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table(name = "EMP")
@@ -23,7 +23,7 @@ public class Emp {
 	private Integer mgr;
 
 	@Column(name = "HIREDATE")
-	private LocalDate hiredate;
+	private String hiredate;
 
 	@Column(name = "SAL", precision = 7, scale = 2)
 	private BigDecimal sal;
@@ -35,7 +35,7 @@ public class Emp {
 	private Integer deptno;
 
 	@Column(name = "TSTAMP")
-	private LocalDateTime tstamp;
+	private String tstamp;
 
 	// Getters and setters
 
@@ -71,11 +71,11 @@ public class Emp {
 		this.mgr = mgr;
 	}
 
-	public LocalDate getHiredate() {
+	public String getHiredate() {
 		return hiredate;
 	}
 
-	public void setHiredate(LocalDate hiredate) {
+	public void setHiredate(String hiredate) {
 		this.hiredate = hiredate;
 	}
 
@@ -103,11 +103,11 @@ public class Emp {
 		this.deptno = deptno;
 	}
 
-	public LocalDateTime getTstamp() {
+	public String getTstamp() {
 		return tstamp;
 	}
 
-	public void setTstamp(LocalDateTime tstamp) {
+	public void setTstamp(String tstamp) {
 		this.tstamp = tstamp;
 	}
 }
