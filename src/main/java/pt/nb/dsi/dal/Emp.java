@@ -11,7 +11,7 @@ public class Emp {
 
 	@Id
 	@Column(name = "EMPNO", nullable = false)
-	private Integer empno;
+	private Long empno;
 
 	@Column(name = "ENAME", length = 10)
 	private String ename;
@@ -39,11 +39,11 @@ public class Emp {
 
 	// Getters and setters
 
-	public Integer getEmpno() {
+	public Long getEmpno() {
 		return empno;
 	}
 
-	public void setEmpno(Integer empno) {
+	public void setEmpno(Long empno) {
 		this.empno = empno;
 	}
 

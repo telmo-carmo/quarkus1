@@ -25,7 +25,7 @@ public class EmpResource {
 
     @GET
     @Path("/{id}")
-    public Emp getById(@PathParam("id") Integer id) {
+    public Emp getById(@PathParam("id") Long id) {
         return empRepository.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class EmpResource {
     @PUT
     @Path("/{id}")
     @Transactional
-    public Response update(@PathParam("id") Integer id, Emp emp) {
+    public Response update(@PathParam("id") Long id, Emp emp) {
         Emp entity = empRepository.findById(id);
         if (entity == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -58,7 +58,7 @@ public class EmpResource {
     @DELETE
     @Path("/{id}")
     @Transactional
-    public Response delete(@PathParam("id") Integer id) {
+    public Response delete(@PathParam("id") Long id) {
         boolean deleted = empRepository.deleteById(id);
         if (deleted) {
             return Response.noContent().build();

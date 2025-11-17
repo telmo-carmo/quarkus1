@@ -25,9 +25,19 @@ public class GraphBonusResource {
     @Inject
     IBonusRepository bonusRepository;
 
+    /*
+    query allBonus {
+        allBonus {
+            ename
+            job
+
+        }
+    }
+        
+     */
     @Query("allBonus") 
     @Description("Get all Bonus from a galaxy far far away") 
-    public List<Bonus> getAll() {
+    public List<Bonus> getAllBonus() {
         return bonusRepository.findAll();
     }
 }
