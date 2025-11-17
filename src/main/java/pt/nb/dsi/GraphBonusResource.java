@@ -36,7 +36,7 @@ public class GraphBonusResource {
     }
 
     query getBonus {
-        bonus(bonusId: "JONES") {
+        bonus(name: "JONES") {
             ename
             job
             sal
@@ -51,7 +51,7 @@ public class GraphBonusResource {
 
     @Query
     @Description("Get one Bonus by name")
-    public Bonus getBonus(@Name("bonusId") String id) {
-        return bonusRepository.findOne(id);
+    public Bonus getBonus(@Name("name") String name) {
+        return bonusRepository.findOne(name);
     }
 }
