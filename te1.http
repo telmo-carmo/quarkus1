@@ -93,3 +93,8 @@ Content-Type: application/json
   "role": "ADMIN",
   "createdAt": "2000-03-01T00:00:00Z"
 }
+
+###
+GET {{host1}}/api/emp
+
+###
