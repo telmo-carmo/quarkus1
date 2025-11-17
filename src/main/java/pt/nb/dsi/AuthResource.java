@@ -2,8 +2,7 @@ package pt.nb.dsi;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Collection;
+
 
 import java.util.HashMap;
 import java.util.Map;
